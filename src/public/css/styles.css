@@ -36,3 +36,6 @@ nav > div > p {
 button {
   font-size: 20px;
 }
+.searchForm {
+  grid-area: 1/2/2/3;
+}

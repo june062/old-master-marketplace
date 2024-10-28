@@ -1,5 +1,5 @@
 function homeViewGet(req, res) {
-  res.render("homeView", { header: "Newly Added" });
+  res.render("homeView", { header: "Newly Added", search: "/" });
 }
 
 module.exports = {
