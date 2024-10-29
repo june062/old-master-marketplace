@@ -3,14 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/css/styles.css" rel="stylesheet" type="text/css" />
     <title>Artist Info</title>
   </head>
   <body>
+    <%-include('./reusables/navbar')%>
     <div class="info">
       <div>
-        <img src="" alt="Image of <%= artist.firstname%>" />
+        
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Michelangelo_Daniele_da_Volterra_%28dettaglio%29.jpg/1200px-Michelangelo_Daniele_da_Volterra_%28dettaglio%29.jpg" alt="Image of <%= artist.firstname%>" />
+        </a>
       </div>
-      <div>
+      <div class = 'selectedElementInfo'>
         <%for(const property in artist){%> <% if(property === 'id'){ continue; }
         %>
         <p><%=artist[property]%></p>
@@ -18,6 +22,18 @@
       </div>
     </div>
 
-    <main></main>
+    <main>
+        <%for(let i = 0; i < artworks.length; i++){%>
+            <div>
+                <p><%=artworks[i].name%></p>
+                <p>
+                    <a href="artworks/<%=artworks[i].id%>">
+                        <img src="" alt="Image of <%=artworks[i].name%>">
+                    </a>
+                </p>
+
+            </div>
+            <%}%>
+    </main>
   </body>
 </html>

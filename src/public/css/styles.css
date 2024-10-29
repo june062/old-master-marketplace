@@ -42,3 +42,18 @@ button {
 .searchForm {
   grid-area: 1/2/2/3;
 }
+
+.info {
+  display: flex;
+}
+img {
+  max-width: 300px;
+  height: auto;
+}
+.selectedElementInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+  padding-left: 10px;
+}
