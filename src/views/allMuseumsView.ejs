@@ -11,6 +11,15 @@
     {search: search})%>
     <main>
       <h1><%=header%></h1>
+      <div>
+        <ul>
+          <%for(let i = 0; i< rows.length; i++){%>
+          <li>
+            <a href="<%=rows[i].id%>"><%=rows[i].name%></a>
+          </li>
+          <%}%>
+        </ul>
+      </div>
     </main>
   </body>
 </html>
