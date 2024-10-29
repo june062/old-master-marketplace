@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+    <title>New Artist</title>
+  </head>
+  <body>
+    <%-include('../reusables/navbar')%>
+    <main class="containsForm">
+      <h1><%=header%></h1>
+      <form action="/newArtworkForm/submit" method="post">
+        <p>
+          <label for="artworkName">Name of Artwork</label>
+          <input type="text" id="artworkName" name="artworkName" required />
+        </p>
+        <p>
+          <label for="mediums">Mediums Used</label>
+          <input type="text" id="mediums" name="mediums" required />
+        </p>
+
+        <p>
+          <label for="dateCreated">Date Created</label>
+          <input type="date" id="dateCreated" name="dateCreated" required />
+        </p>
+
+        <p>
+          <label for="img">Upload an Image</label>
+          <input
+            type="file"
+            id="img"
+            name="img"
+            accept="image/png, image/jpeg"
+          />
+        </p>
+
+        <p>
+          <button type="submit">Add Artwork</button>
+        </p>
+      </form>
+    </main>
+  </body>
+</html>
