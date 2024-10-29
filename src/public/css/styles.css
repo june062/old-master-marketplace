@@ -23,6 +23,9 @@ nav {
 main {
   grid-area: 2/2/3/3;
 }
+main.containsForm {
+  grid-area: 1/2/3/3;
+}
 nav > div {
   display: flex;
   flex-direction: column;

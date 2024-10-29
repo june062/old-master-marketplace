@@ -1,9 +1,9 @@
 const { Router } = require("express");
-const { allArtistsGet } = require("../controllers/artistsControllers");
+const artistsControllers = require("../controllers/artistsControllers");
 const artistsRouter = Router();
 
-artistsRouter.get("/", allArtistsGet);
-artistsRouter.get("/newArtistForm");
+artistsRouter.get("/", artistsControllers.allArtistsGet);
+artistsRouter.get("/newArtistForm", artistsControllers.newArtistFormGet);
 
 artistsRouter.post("/newArtistForm/submit");
 

@@ -1,8 +1,8 @@
 const { Router } = require("express");
-const { allArtworksGet } = require("../controllers/artworksControllers");
+const artworksControllers = require("../controllers/artworksControllers");
 const artworksRouter = Router();
 
-artworksRouter.get("/", allArtworksGet);
+artworksRouter.get("/", artworksControllers.allArtworksGet);
 artworksRouter.get("/newArtistForm");
 artworksRouter.post("/newArtistForm/submit");
 artworksRouter.get("/:artworkID");

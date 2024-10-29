@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+    <title>New Artist</title>
+  </head>
+  <body>
+    <%-include('../reusables/navbar')%>
+    <main class="containsForm">
+      <h1><%=header%></h1>
+      <form action="/newArtistForm/submit" method="post">
+        <p>
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="firstName" required />
+        </p>
+        <p>
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="lastName" required />
+        </p>
+
+        <p>
+          <label for="dob">Date of Birth</label>
+          <input type="date" id="dob" name="dob" required />
+        </p>
+        <p>
+          <label for="birthPlace">Birth Place</label>
+          <input type="text" id="birthPlace" name="birthPlace" />
+        </p>
+
+        <p>
+          <label for="description">Description</label>
+          <textarea
+            name="description"
+            id="description"
+            maxlength="75"
+          ></textarea>
+        </p>
+
+        <p>
+          <label for="img">Upload an Image</label>
+          <input
+            type="file"
+            id="img"
+            name="img"
+            accept="image/png, image/jpeg"
+          />
+        </p>
+
+        <p>
+          <button type="submit">Add Artist</button>
+        </p>
+      </form>
+    </main>
+  </body>
+</html>
