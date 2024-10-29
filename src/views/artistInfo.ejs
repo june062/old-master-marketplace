@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Artist Info</title>
+  </head>
+  <body>
+    <div class="info">
+      <div>
+        <img src="" alt="Image of <%= artist.firstname%>" />
+      </div>
+      <div>
+        <%for(const property in artist){%> <% if(property === 'id'){ continue; }
+        %>
+        <p><%=artist[property]%></p>
+        <%}%>
+      </div>
+    </div>
+
+    <main></main>
+  </body>
+</html>
