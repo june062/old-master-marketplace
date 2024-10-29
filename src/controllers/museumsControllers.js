@@ -1,4 +1,7 @@
-function allMuseumsGet(req, res) {
+const queries = require("../db/queries");
+
+async function allMuseumsGet(req, res) {
+  await queries.getAllMuseums();
   res.render("allMuseumsView", { header: "All Museums", search: "/museums" });
 }
 
