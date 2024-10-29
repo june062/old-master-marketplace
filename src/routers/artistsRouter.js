@@ -7,6 +7,6 @@ artistsRouter.get("/newArtistForm", artistsControllers.newArtistFormGet);
 
 artistsRouter.post("/newArtistForm/submit");
 
-artistsRouter.get("/:artistID");
+artistsRouter.get("/:artistID", artistsControllers.artistInfoGet);
 
 module.exports = artistsRouter;

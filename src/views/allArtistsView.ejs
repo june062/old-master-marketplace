@@ -11,6 +11,17 @@
     {search: search})%>
     <main>
       <h1><%=header%></h1>
+      <div>
+        <ul>
+          <%for(let i = 0; i< rows.length; i++){%>
+          <li>
+            <a href="artists/<%=rows[i].id%>"
+              ><%=rows[i].firstname + ' ' + rows[i].lastname%></a
+            >
+          </li>
+          <%}%>
+        </ul>
+      </div>
     </main>
   </body>
 </html>

@@ -1,7 +1,11 @@
-function allArtworksGet(req, res) {
+const queries = require("../db/queries");
+
+async function allArtworksGet(req, res) {
+  const rows = await queries.getAllArtworks();
   res.render("allArtworksView", {
     header: "All Artworks",
     search: "/artworks",
+    rows: rows,
   });
 }
 function newArtworkFormGet(req, res) {
