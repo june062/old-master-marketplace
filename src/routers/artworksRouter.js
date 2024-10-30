@@ -5,5 +5,5 @@ const artworksRouter = Router();
 artworksRouter.get("/", artworksControllers.allArtworksGet);
 artworksRouter.get("/newArtworkForm", artworksControllers.newArtworkFormGet);
 artworksRouter.post("/newArtistForm/submit");
-artworksRouter.get("/:artworkID");
+artworksRouter.get("/:artworkID", artworksControllers.artworkInfoGet);
 module.exports = artworksRouter;

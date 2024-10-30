@@ -25,10 +25,18 @@ async function getArtistInfo(id) {
   const artworks = resultingArtworks.rows;
   return { artist, artworks };
 }
+async function getArtworkInfo(id) {
+  const { rows } = await pool.query(
+    "SELECT artworks.name AS artworkName,artists.firstname, artists.lastname, mediums, datecompleted,museums.name AS museumName, museums.city, museums.country FROM artworks INNER JOIN artists ON artist_id = artists.id INNER JOIN museums ON museum_id = museums.id WHERE artworks.id=$1 ",
+    [Number(id)]
+  );
+  console.log(rows);
+}
 
 module.exports = {
   getAllMuseums,
   getAllArtworks,
   getAllArtists,
   getArtistInfo,
+  getArtworkInfo,
 };

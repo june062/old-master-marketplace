@@ -11,7 +11,13 @@ async function allArtworksGet(req, res) {
 function newArtworkFormGet(req, res) {
   res.render("forms/newArtworkFormView", { header: "Add a new artwork" });
 }
+
+async function artworkInfoGet(req, res) {
+  await queries.getArtworkInfo(req.params.artworkID);
+  res.end();
+}
 module.exports = {
   allArtworksGet,
   newArtworkFormGet,
+  artworkInfoGet,
 };
