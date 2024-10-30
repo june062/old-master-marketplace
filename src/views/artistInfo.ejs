@@ -15,10 +15,10 @@
         </a>
       </div>
       <div class = 'selectedElementInfo'>
-        <%for(const property in artist){%> <% if(property === 'id'){ continue; }
-        %>
-        <p><%=artist[property]%></p>
-        <%}%>
+        <p>Artists Name: <%=artist.name%></p>
+        <p>Date of Birth: <%=artist.dob%></p>
+        <p>Birthplace: <%=artist.birthplace%></p>
+        <p>Description: <%=artist.description%></p>
       </div>
     </div>
 
@@ -27,7 +27,7 @@
             <div>
                 <p><%=artworks[i].name%></p>
                 <p>
-                    <a href="artworks/<%=artworks[i].id%>">
+                    <a href="/artworks/<%=artworks[i].id%>">
                         <img src="" alt="Image of <%=artworks[i].name%>">
                     </a>
                 </p>

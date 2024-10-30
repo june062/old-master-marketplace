@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+    <title>Artist Info</title>
+  </head>
+  <body>
+    <%-include('./reusables/navbar')%>
+    <div class="info">
+      <div>
+        
+        <img src="http://www.italianrenaissance.org/wp-content/uploads/2012/09/michelangelo-creation-of-adam-590x474.jpg" alt="Image of " />
+        </a>
+      </div>
+      <div class = 'selectedElementInfo'>
+        <p>Name: <%=artworkInfo.artworkname%></p>
+        <p>Created By: <%=artworkInfo.artistname%></p>
+        <p>Completed: <%=artworkInfo.datecompleted%></p>
+        <p>Located: <%=artworkInfo.artworklocation%></p>
+        <p>Sold: <%=artworkInfo.sold%></p>
+      </div>
+    </div>
+
+    <!-- <main>
+        <%for(const property in artworkInfo){%>
+            <div>
+                <p><%=property%></p>
+                <p>
+                    <a href="">
+                        <img src="" alt="">
+                    </a>
+                </p>
+
+            </div>
+            <%}%>
+    </main> -->
+  </body>
+</html>

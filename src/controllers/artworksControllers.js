@@ -13,8 +13,9 @@ function newArtworkFormGet(req, res) {
 }
 
 async function artworkInfoGet(req, res) {
-  await queries.getArtworkInfo(req.params.artworkID);
-  res.end();
+  const [artworkInfo] = await queries.getArtworkInfo(req.params.artworkID);
+  console.log(artworkInfo);
+  res.render("artworkInfo", { artworkInfo: artworkInfo });
 }
 module.exports = {
   allArtworksGet,
