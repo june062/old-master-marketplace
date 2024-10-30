@@ -16,25 +16,11 @@
       </div>
       <div class = 'selectedElementInfo'>
         <p>Name: <%=artworkInfo.artworkname%></p>
-        <p>Created By: <%=artworkInfo.artistname%></p>
+        <p>Created By: <a href="/artists/<%=artworkInfo.artist_id%>"><%=artworkInfo.artistname%></a></p>
         <p>Completed: <%=artworkInfo.datecompleted%></p>
-        <p>Located: <%=artworkInfo.artworklocation%></p>
+        <p>Located: <a href="/museums/<%=artworkInfo.museum_id%>"><%=artworkInfo.artworklocation%></a></p>
         <p>Sold: <%=artworkInfo.sold%></p>
       </div>
     </div>
-
-    <!-- <main>
-        <%for(const property in artworkInfo){%>
-            <div>
-                <p><%=property%></p>
-                <p>
-                    <a href="">
-                        <img src="" alt="">
-                    </a>
-                </p>
-
-            </div>
-            <%}%>
-    </main> -->
   </body>
 </html>

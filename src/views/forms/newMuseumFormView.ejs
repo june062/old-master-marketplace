@@ -13,16 +13,44 @@
       <form action="/newMuseumForm/submit" method="post">
         <p>
           <label for="museumName">Name of Museum</label>
-          <input type="text" id="museumName" name="museumName" required />
+          <input
+            type="text"
+            id="museumName"
+            name="museumName"
+            minlength="1"
+            maxlength="60"
+            pattern="^[A-Za-z0-9]+(?: +[A-Za-z0-9]+)*$"
+            required
+          />
+        </p>
+        <p>
+          <label for="city">City</label>
+          <input
+            type="text"
+            id="city"
+            name="city"
+            minlength="1"
+            maxlength="40"
+            pattern="^[A-Za-z0-9]+(?: +[A-Za-z0-9]+)*$"
+            required
+          />
         </p>
         <p>
           <label for="country">Country</label>
-          <input type="text" id="country" name="country" required />
+          <input
+            type="text"
+            id="country"
+            name="country"
+            minlength="1"
+            maxlength="40"
+            pattern="^[A-Za-z0-9]+(?: +[A-Za-z0-9]+)*$"
+            required
+          />
         </p>
 
         <p>
           <label for="city">Date Created</label>
-          <input type="text" id="city" name="city" required />
+          <input type="date" id="city" name="city" required />
         </p>
 
         <p>

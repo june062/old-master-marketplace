@@ -40,7 +40,7 @@ async function getMuseumInfo(id) {
   );
   const museumInfo = museumInfoResult.rows[0];
   const museumArtworksResult = await pool.query(
-    "SELECT name, datecompleted FROM artworks WHERE museum_id =$1",
+    "SELECT name, datecompleted, id FROM artworks WHERE museum_id =$1",
     [Number(id)]
   );
   const museumArtworks = museumArtworksResult.rows;
