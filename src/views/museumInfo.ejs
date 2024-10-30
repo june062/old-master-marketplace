@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="/css/styles.css" rel="stylesheet" type="text/css" />
+    <title>Artist Info</title>
+  </head>
+  <body>
+    <%-include('./reusables/navbar')%>
+    <div class="info">
+      <div>
+        
+        <img src="https://www.thetrainline.com/cms/media/4162/italy_rome_vatican-city.jpg?mode=crop&width=660&height=440&quality=70" alt="Image of <%=museumInfo.name%>" />
+        </a>
+      </div>
+      <div class = 'selectedElementInfo'>
+        <p>Museum Name: <%=museumInfo.name%></p>
+        <p>City: <%=museumInfo.city%></p>
+        <p>Country: <%=museumInfo.country%></p>
+        
+      </div>
+    </div>
+    <main>
+        <%for(let i = 0; i < museumArtworks.length; i++){%>
+            <div>
+                <p><%=museumArtworks[i].name%></p>
+                <p>
+                    <a href="/artworks/<%=museumArtworks[i].id%>">
+                        <img src="" alt="Image of <%=museumArtworks[i].name%>">
+                    </a>
+                </p>
+
+            </div>
+            <%}%>
+    </main>
+</body>
+</html>

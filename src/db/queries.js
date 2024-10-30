@@ -33,11 +33,28 @@ async function getArtworkInfo(id) {
   );
   return rows;
 }
+async function getMuseumInfo(id) {
+  const museumInfoResult = await pool.query(
+    "SELECT * FROM museums where id = $1",
+    [Number(id)]
+  );
+  const museumInfo = museumInfoResult.rows[0];
+  const museumArtworksResult = await pool.query(
+    "SELECT name, datecompleted FROM artworks WHERE museum_id =$1",
+    [Number(id)]
+  );
+  const museumArtworks = museumArtworksResult.rows;
 
+  return {
+    museumInfo: museumInfo,
+    museumArtworks: museumArtworks,
+  };
+}
 module.exports = {
   getAllMuseums,
   getAllArtworks,
   getAllArtists,
   getArtistInfo,
   getArtworkInfo,
+  getMuseumInfo,
 };
