@@ -79,6 +79,13 @@ async function createNewArtist(
   );
   res.locals.successMessage = "Artist has been created!";
 }
+async function createNewMuseum(res, name, city, country) {
+  await pool.query(
+    "INSERT INTO museums (name,city,country) VALUES ($1,$2,$3)",
+    [name, city, country]
+  );
+  res.locals.successMessage = "Museum has been created!";
+}
 module.exports = {
   getAllMuseums,
   getAllArtworks,
@@ -88,4 +95,5 @@ module.exports = {
   getMuseumInfo,
   createNewArtwork,
   createNewArtist,
+  createNewMuseum,
 };

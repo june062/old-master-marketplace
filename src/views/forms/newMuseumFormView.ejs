@@ -10,7 +10,7 @@
     <%-include('../reusables/navbar')%>
     <main class="containsForm">
       <h1><%=header%></h1>
-      <form action="/newMuseumForm/submit" method="post">
+      <form action="newMuseumForm/submit" method="post">
         <p>
           <label for="museumName">Name of Museum</label>
           <input
@@ -19,7 +19,7 @@
             name="museumName"
             minlength="1"
             maxlength="60"
-            pattern="/^[A-Za-z0-9 .,'\-]+$/"
+            pattern="[a-zA-Z0-9 ]+"
             required
           />
         </p>
@@ -31,7 +31,7 @@
             name="city"
             minlength="1"
             maxlength="40"
-            pattern="/^[A-Za-z0-9 .,'\-]+$/"
+            pattern="[a-zA-Z0-9 ]+"
             required
           />
         </p>
@@ -43,7 +43,7 @@
             name="country"
             minlength="1"
             maxlength="40"
-            pattern="/^[A-Za-z0-9 .,'\-]+$/"
+            pattern="[a-zA-Z0-9 ]+"
             required
           />
         </p>
@@ -54,9 +54,15 @@
         </p>
 
         <p>
-          <button type="submit">Add Artwork</button>
+          <button type="submit">Add Museum</button>
         </p>
       </form>
+      <%if(errorMessages!= null){%> <%for(let i = 0; i < errorMessages.length;
+      i++){%>
+      <p><%=errorMessages[i].msg%></p>
+      <%}%> <%}%> <%if(success!==null){%>
+      <p><%=success.successMessage%></p>
+      <%}%>
     </main>
   </body>
 </html>
