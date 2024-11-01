@@ -51,6 +51,7 @@ async function museumInfoGet(req, res) {
   res.render("museumInfo", {
     museumInfo: museumInfo,
     museumArtworks: museumArtworks,
+    museumID: req.params.museumID,
   });
 }
 async function newMuseumPost(req, res) {

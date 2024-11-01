@@ -11,5 +11,6 @@ artistsRouter.post("/newArtistForm/submit", [
 ]);
 
 artistsRouter.get("/:artistID", artistsControllers.artistInfoGet);
+artistsRouter.get("/:artistID/delete", artistsControllers.deleteArtist);
 
 module.exports = artistsRouter;

@@ -49,7 +49,10 @@ async function newArtworkFormGet(req, res) {
 
 async function artworkInfoGet(req, res) {
   const [artworkInfo] = await queries.getArtworkInfo(req.params.artworkID);
-  res.render("artworkInfo", { artworkInfo: artworkInfo });
+  res.render("artworkInfo", {
+    artworkInfo: artworkInfo,
+    artworkID: req.params.artworkID,
+  });
 }
 async function newArtworkPost(req, res) {
   const errors = validationResult(req);

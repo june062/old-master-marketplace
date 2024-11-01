@@ -55,7 +55,11 @@ function newArtistFormGet(req, res) {
 async function artistInfoGet(req, res) {
   const { artist, artworks } = await queries.getArtistInfo(req.params.artistID);
 
-  res.render("artistInfo", { artist: artist, artworks: artworks });
+  res.render("artistInfo", {
+    artist: artist,
+    artworks: artworks,
+    artistID: req.params.artistID,
+  });
   res.end();
 }
 
@@ -83,10 +87,19 @@ async function newArtistPost(req, res) {
     success: { successMessage: res.locals.successMessage },
   });
 }
+async function deleteArtist(req, res) {
+  try {
+    await queries.deleteArtist(req.params.artistID);
+    res.redirect("/artists");
+  } catch (error) {
+    console.log(error);
+  }
+}
 module.exports = {
   allArtistsGet,
   newArtistFormGet,
   artistInfoGet,
   validationMiddleware,
   newArtistPost,
+  deleteArtist,
 };

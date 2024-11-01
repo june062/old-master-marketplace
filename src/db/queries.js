@@ -86,6 +86,13 @@ async function createNewMuseum(res, name, city, country) {
   );
   res.locals.successMessage = "Museum has been created!";
 }
+
+async function deleteArtist(id) {
+  await pool.query("DELETE FROM artists WHERE artists.id = $1", [Number(id)]);
+  await pool.query("DELETE FROM artworks WHERE artworks.artist_id = $1", [
+    Number(id),
+  ]);
+}
 module.exports = {
   getAllMuseums,
   getAllArtworks,
@@ -96,4 +103,5 @@ module.exports = {
   createNewArtwork,
   createNewArtist,
   createNewMuseum,
+  deleteArtist,
 };
