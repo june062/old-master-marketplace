@@ -1,3 +1,4 @@
+const { query } = require("../db/pool");
 const queries = require("../db/queries");
 const { body, validationResult } = require("express-validator");
 
@@ -33,10 +34,15 @@ async function allArtworksGet(req, res) {
     rows: rows,
   });
 }
-function newArtworkFormGet(req, res) {
+async function newArtworkFormGet(req, res) {
+  const allArtists = await queries.getAllArtists();
+  const allMuseums = await queries.getAllMuseums();
   res.render("forms/newArtworkFormView", {
     header: "Add a new artwork",
     errorMessages: null,
+    success: null,
+    allArtists: allArtists,
+    allMuseums: allMuseums,
   });
 }
 

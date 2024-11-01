@@ -37,16 +37,20 @@
         <p>
           <label for="artist">Choose an Artist</label>
           <select name="artist" id="artist">
-            <!-- Loop to create option elements depending on how many
-             stored artists we have -->
+            <%for(const prop of allArtists){%>
+            <option value="<%=prop.id%>">
+              <%=prop.firstname%> <%=prop.lastname%>
+            </option>
+            <%}%>
           </select>
         </p>
 
         <p>
           <label for="museum">Choose a Museum</label>
           <select name="museum" id="museum">
-            <!-- Loop to create option elements depending on how many
-             stored museums we have -->
+            <%for(const prop of allMuseums){%>
+            <option value="<%=prop.id%>"><%=prop.name%></option>
+            <%}%>
           </select>
         </p>
 
@@ -56,8 +60,8 @@
       </form>
       <%if(errorMessages){%> <%for(let i = 0; i < errorMessages.length; i++){%>
       <p><%=errorMessages[i].msg%></p>
-      <%}%> <%}%> <%if(sucess.successMessage){%>
-      <p><%=sucess.successMessage%></p>
+      <%}%> <%}%> <%if(success){%>
+      <p><%=success.successMessage%></p>
       <%}%>
     </main>
   </body>
