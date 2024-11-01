@@ -79,11 +79,19 @@ async function newArtworkPost(req, res) {
     success: { successMessage: res.locals.successMessage },
   });
 }
-
+async function deleteArtwork(req, res) {
+  try {
+    await queries.deleteArtwork(req.params.artworkID);
+    res.redirect("/artworks");
+  } catch (error) {
+    console.log(error);
+  }
+}
 module.exports = {
   allArtworksGet,
   newArtworkFormGet,
   artworkInfoGet,
   newArtworkPost,
   validationMiddleware,
+  deleteArtwork,
 };

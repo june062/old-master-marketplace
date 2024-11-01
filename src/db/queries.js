@@ -93,6 +93,9 @@ async function deleteArtist(id) {
     Number(id),
   ]);
 }
+async function deleteArtwork(id) {
+  await pool.query("DELETE FROM artworks WHERE artworks.id = $1", [Number(id)]);
+}
 module.exports = {
   getAllMuseums,
   getAllArtworks,
@@ -104,4 +107,5 @@ module.exports = {
   createNewArtist,
   createNewMuseum,
   deleteArtist,
+  deleteArtwork,
 };

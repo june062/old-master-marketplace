@@ -9,4 +9,6 @@ artworksRouter.post("/newArtworkForm/submit", [
   artworksControllers.newArtworkPost,
 ]);
 artworksRouter.get("/:artworkID", artworksControllers.artworkInfoGet);
+artworksRouter.get("/:artworkID/delete", artworksControllers.deleteArtwork);
+
 module.exports = artworksRouter;
