@@ -13,7 +13,6 @@ async function getAllArtists() {
   return rows;
 }
 async function getArtistInfo(id) {
-  id = 1;
   let resultingArtist = await pool.query(
     "SELECT CONCAT(firstname, ' ', lastname) AS name, dob, birthplace, description FROM artists WHERE id =$1",
     [Number(id)]
@@ -52,7 +51,6 @@ async function getMuseumInfo(id) {
 }
 
 async function createNewArtwork(
-  req,
   res,
   name,
   mediums,
@@ -62,10 +60,24 @@ async function createNewArtwork(
   museum_id
 ) {
   await pool.query(
-    "INSERT INTO artwork(name,mediums, datecompleted,artist_id,sold,museum_id) VALUES($1,$2,$2,$3,$4,$5)",
+    "INSERT INTO artwork(name,mediums, datecompleted,artist_id,sold,museum_id) VALUES($1,$2,$3,$4,$5)",
     [name, mediums, dateCompleted, artist_id, sold, museum_id]
   );
   res.locals.successMessage = "Artwork has been created!";
+}
+async function createNewArtist(
+  res,
+  firstname,
+  lastname,
+  dob,
+  birthplace,
+  description
+) {
+  await pool.query(
+    "INSERT INTO artists (firstname, lastname, dob, birthplace, description) VALUES ($1,$2,$3,$4,$5)",
+    [firstname, lastname, dob, birthplace, description]
+  );
+  res.locals.successMessage = "Artist has been created!";
 }
 module.exports = {
   getAllMuseums,
@@ -75,4 +87,5 @@ module.exports = {
   getArtworkInfo,
   getMuseumInfo,
   createNewArtwork,
+  createNewArtist,
 };

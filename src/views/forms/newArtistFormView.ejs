@@ -49,7 +49,6 @@
             name="birthPlace"
             minlength="1"
             maxlength="120"
-            pattern="^[A-Za-z0-9]+(?: +[A-Za-z0-9]+)*$"
             required
           />
         </p>
@@ -77,6 +76,12 @@
           <button type="submit">Add Artist</button>
         </p>
       </form>
+      <%if(errorMessages!= null){%> <%for(let i = 0; i < errorMessages.length;
+      i++){%>
+      <p><%=errorMessages[i].msg%></p>
+      <%}%> <%}%> <%if(success!==null){%>
+      <p><%=success.successMessage%></p>
+      <%}%>
     </main>
   </body>
 </html>

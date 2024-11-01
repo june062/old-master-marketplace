@@ -12,6 +12,7 @@ const validationMiddleware = [
     .isLength({ min: 1, max: 150 })
     .withMessage("* Artwork name must be between 1 and 150 characters")
     .matches(/^[A-Za-z0-9 .,'!&]+$/)
+    .withMessage("* Only enter letters, numbers, and select special characters")
     .escape(),
   body("mediums")
     .trim()
@@ -56,10 +57,12 @@ async function newArtworkPost(req, res) {
     return res.status(400).render("forms/newArtworkFormView", {
       header: "Add a new artwork",
       errorMessages: errors.array(),
+      success: null,
+      allArtists: [],
+      allMuseums: [],
     });
   }
   await queries.createNewArtwork(
-    req,
     res,
     req.body.artworkName,
     req.body.mediums,
@@ -68,6 +71,8 @@ async function newArtworkPost(req, res) {
     req.body.museum
   );
   res.render("forms/newArtworkFormView", {
+    errorMessages: null,
+    header: "Add a new artwork",
     success: { successMessage: res.locals.successMessage },
   });
 }

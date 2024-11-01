@@ -60,7 +60,7 @@
       </form>
       <%if(errorMessages){%> <%for(let i = 0; i < errorMessages.length; i++){%>
       <p><%=errorMessages[i].msg%></p>
-      <%}%> <%}%> <%if(success){%>
+      <%}%> <%}%> <%if(success!==null){%>
       <p><%=success.successMessage%></p>
       <%}%>
     </main>
