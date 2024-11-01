@@ -50,6 +50,23 @@ async function getMuseumInfo(id) {
     museumArtworks: museumArtworks,
   };
 }
+
+async function createNewArtwork(
+  req,
+  res,
+  name,
+  mediums,
+  dateCompleted,
+  artist_id,
+  sold,
+  museum_id
+) {
+  await pool.query(
+    "INSERT INTO artwork(name,mediums, datecompleted,artist_id,sold,museum_id) VALUES($1,$2,$2,$3,$4,$5)",
+    [name, mediums, dateCompleted, artist_id, sold, museum_id]
+  );
+  res.locals.successMessage = "Artwork has been created!";
+}
 module.exports = {
   getAllMuseums,
   getAllArtworks,
@@ -57,4 +74,5 @@ module.exports = {
   getArtistInfo,
   getArtworkInfo,
   getMuseumInfo,
+  createNewArtwork,
 };
