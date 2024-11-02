@@ -50,6 +50,7 @@ async function newArtworkFormGet(req, res) {
 
 async function artworkInfoGet(req, res) {
   const [artworkInfo] = await queries.getArtworkInfo(req.params.artworkID);
+
   res.render("artworkInfo", {
     artworkInfo: artworkInfo,
     artworkID: req.params.artworkID,
@@ -80,7 +81,7 @@ async function newArtworkPost(req, res) {
   const allArtists = await queries.getAllArtists();
   const allMuseums = await queries.getAllMuseums();
   res.render("forms/newArtworkFormView", {
-    src: `/artworks/${req.params.artworkID}/newArtworkForm/submit`,
+    src: `/artworks/newArtworkForm/submit`,
     header: "Add a new artwork",
     success: { successMessage: res.locals.successMessage },
     allArtists: allArtists,
@@ -95,6 +96,20 @@ async function deleteArtwork(req, res) {
     console.log(error);
   }
 }
+async function updateArtworkFormGet(req, res) {
+  const allArtists = await queries.getAllArtists();
+  const allMuseums = await queries.getAllMuseums();
+  const [artwork] = await queries.getArtworkInfo(req.params.artworkID);
+  console.log(artwork);
+
+  res.render("forms/newArtworkFormView", {
+    header: "Update artwork",
+    src: `/artworks/${req.params.artworkID}/newArtworkForm/submit`,
+    allArtists: allArtists,
+    allMuseums: allMuseums,
+    artwork: artwork,
+  });
+}
 module.exports = {
   allArtworksGet,
   newArtworkFormGet,
@@ -102,4 +117,5 @@ module.exports = {
   newArtworkPost,
   validationMiddleware,
   deleteArtwork,
+  updateArtworkFormGet,
 };

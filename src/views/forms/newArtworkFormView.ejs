@@ -9,15 +9,23 @@
   <body>
     <%-include('../reusables/navbar')%>
     <main class="containsForm">
+      
       <h1><%=header%></h1>
       <form action= <%=src%> method="post">
         <p>
           <label for="artworkName">Name of Artwork</label>
-          <input type="text" id="artworkName" name="artworkName" required />
+          <input type="text" id="artworkName" name="artworkName" 
+          <%if(locals.artwork){%>
+            value = "<%=artwork.artworkname%>""
+            <%}%>
+          required />
         </p>
         <p>
           <label for="mediums">Mediums Used</label>
-          <input type="text" id="mediums" name="mediums" required />
+          <input type="text" id="mediums" name="mediums" 
+          <%if(locals.artwork){%>
+            value = "<%=artwork.mediums%>""
+            <%}%>required />
         </p>
 
         <p>

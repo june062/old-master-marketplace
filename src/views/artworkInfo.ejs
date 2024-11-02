@@ -16,11 +16,12 @@
       </div>
       <div class = 'selectedElementInfo'>
         <p>Name: <%=artworkInfo.artworkname%></p>
-        <p>Created By: <a href="/artists/<%=artworkInfo.artist_id%>"><%=artworkInfo.artistname%></a></p>
+        <p>Created By: <a href="/artists/<%=artworkInfo.artist_id%>"><%=artworkInfo.firstname%> <%=artworkInfo.lastname%></a></p>
         <p>Completed: <%=artworkInfo.datecompleted%></p>
-        <p>Located: <a href="/museums/<%=artworkInfo.museum_id%>"><%=artworkInfo.artworklocation%></a></p>
+        <p>Located: <a href="/museums/<%=artworkInfo.museum_id%>"><%=artworkInfo.name%> in <%=artworkInfo.city%>, <%=artworkInfo.country%></a></p>
         <p>Sold: <%=artworkInfo.sold%></p>
         <p><button><a href="/artworks/<%=artworkID%>/delete">Delete</a></button></p>
+        <p><button><a href="/artworks/<%=artworkID%>/newArtworkForm/update">Update</a></button></p>
       </div>
     </div>
   </body>

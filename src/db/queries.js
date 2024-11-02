@@ -27,7 +27,7 @@ async function getArtistInfo(id) {
 }
 async function getArtworkInfo(id) {
   const { rows } = await pool.query(
-    "SELECT artworks.name AS artworkName,CONCAT(artists.firstname,' ', artists.lastname) AS artistName, mediums, datecompleted,CONCAT(museums.name,' in ', museums.city, ', ',museums.country) AS artworkLocation, sold, artist_id, museum_id FROM artworks INNER JOIN artists ON artist_id = artists.id INNER JOIN museums ON museum_id = museums.id WHERE artworks.id=$1 ",
+    "SELECT artworks.name AS artworkName,artists.firstname,artists.lastname, mediums, datecompleted,museums.name, museums.city,museums.country, sold, artist_id, museum_id FROM artworks INNER JOIN artists ON artist_id = artists.id INNER JOIN museums ON museum_id = museums.id WHERE artworks.id=$1 ",
     [Number(id)]
   );
   return rows;
