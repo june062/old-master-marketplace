@@ -37,7 +37,7 @@
         <p>
           <label for="artist">Choose an Artist</label>
           <select name="artist" id="artist">
-            <%for(const prop of allArtists){%>
+            <%for(const prop of locals.allArtists){%>
             <option value="<%=prop.id%>">
               <%=prop.firstname%> <%=prop.lastname%>
             </option>
@@ -48,7 +48,7 @@
         <p>
           <label for="museum">Choose a Museum</label>
           <select name="museum" id="museum">
-            <%for(const prop of allMuseums){%>
+            <%for(const prop of locals.allMuseums){%>
             <option value="<%=prop.id%>"><%=prop.name%></option>
             <%}%>
           </select>
@@ -58,9 +58,9 @@
           <button type="submit">Add Artwork</button>
         </p>
       </form>
-      <%if(errorMessages){%> <%for(let i = 0; i < errorMessages.length; i++){%>
+      <%if(locals.errorMessages){%> <%for(let i = 0; i < errorMessages.length; i++){%>
       <p><%=errorMessages[i].msg%></p>
-      <%}%> <%}%> <%if(success!==null){%>
+      <%}%> <%}%> <%if(locals.success){%>
       <p><%=success.successMessage%></p>
       <%}%>
     </main>

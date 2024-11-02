@@ -64,20 +64,27 @@ async function newArtworkPost(req, res) {
       success: null,
       allArtists: [],
       allMuseums: [],
+      src: `/artworks/${req.params.artworkID}/newArtworkForm/submit`,
     });
   }
+
   await queries.createNewArtwork(
     res,
     req.body.artworkName,
     req.body.mediums,
     req.body.dateCreated,
     req.body.artist,
+    req.body.sold,
     req.body.museum
   );
+  const allArtists = await queries.getAllArtists();
+  const allMuseums = await queries.getAllMuseums();
   res.render("forms/newArtworkFormView", {
-    errorMessages: null,
+    src: `/artworks/${req.params.artworkID}/newArtworkForm/submit`,
     header: "Add a new artwork",
     success: { successMessage: res.locals.successMessage },
+    allArtists: allArtists,
+    allMuseums: allMuseums,
   });
 }
 async function deleteArtwork(req, res) {

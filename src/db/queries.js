@@ -60,7 +60,7 @@ async function createNewArtwork(
   museum_id
 ) {
   await pool.query(
-    "INSERT INTO artwork(name,mediums, datecompleted,artist_id,sold,museum_id) VALUES($1,$2,$3,$4,$5)",
+    "INSERT INTO artworks(name,mediums, datecompleted,artist_id,sold,museum_id) VALUES($1,$2,$3,$4,$5, $6)",
     [name, mediums, dateCompleted, artist_id, sold, museum_id]
   );
   res.locals.successMessage = "Artwork has been created!";
