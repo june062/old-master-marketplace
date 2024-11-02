@@ -57,10 +57,10 @@
           <button type="submit">Add Museum</button>
         </p>
       </form>
-      <%if(errorMessages!= null){%> <%for(let i = 0; i < errorMessages.length;
+      <%if(locals.errorMessages){%> <%for(let i = 0; i < errorMessages.length;
       i++){%>
       <p><%=errorMessages[i].msg%></p>
-      <%}%> <%}%> <%if(success!==null){%>
+      <%}%> <%}%> <%if(locals.success){%>
       <p><%=success.successMessage%></p>
       <%}%>
     </main>

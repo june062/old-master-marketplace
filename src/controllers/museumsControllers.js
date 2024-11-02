@@ -84,6 +84,13 @@ async function deleteMuseum(req, res) {
     console.log(error);
   }
 }
+
+async function updateMuseumFormGet(req, res) {
+  res.render("forms/newMuseumFormView", {
+    header: "Update museum",
+    src: `/museums/${req.params.museumID}/newArtworkForm/update/submit`,
+  });
+}
 module.exports = {
   allMuseumsGet,
   newMuseumFormGet,
@@ -91,4 +98,5 @@ module.exports = {
   newMuseumPost,
   validationMiddleware,
   deleteMuseum,
+  updateMuseumFormGet,
 };
