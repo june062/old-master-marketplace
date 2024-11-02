@@ -69,10 +69,10 @@
             name="description"
             id="description"
             maxlength="255"
-            <%if(locals.artist){%>
-              value="<%=artist.description%>"
-              <%}%>
-          ></textarea>
+            
+          ><%if(locals.artist){%>
+            <%=artist.description%>
+            <%}%></textarea>
         </p>
 
         <p>

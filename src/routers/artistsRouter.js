@@ -17,4 +17,9 @@ artistsRouter.get(
   artistsControllers.artistUpdateFormGet
 );
 
+artistsRouter.post(
+  "/:artistID/newArtistForm/update/submit",
+  artistsControllers.artistUpdatePost
+);
+
 module.exports = artistsRouter;

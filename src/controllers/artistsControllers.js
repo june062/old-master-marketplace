@@ -55,7 +55,6 @@ function newArtistFormGet(req, res) {
 
 async function artistInfoGet(req, res) {
   const { artist, artworks } = await queries.getArtistInfo(req.params.artistID);
-  res.locals.artist = artist;
 
   res.render("artistInfo", {
     artist: artist,
@@ -70,9 +69,8 @@ async function newArtistPost(req, res) {
 
   if (!errors.isEmpty()) {
     res.status(400).render("forms/newArtistFormView", {
-      header: "Add a new artwork",
+      header: "Add a new artist",
       errorMessages: errors.array(),
-      success: null,
     });
   }
   await queries.createNewArtist(
@@ -84,7 +82,6 @@ async function newArtistPost(req, res) {
     req.body.description
   );
   res.render("forms/newArtistFormView", {
-    errorMessages: null,
     header: "Add a new artist",
     success: { successMessage: res.locals.successMessage },
   });
@@ -103,10 +100,34 @@ async function artistUpdateFormGet(req, res) {
   res.render("forms/newArtistFormView", {
     header: "Update artist",
     artist: artist,
-    src: `/artists/${req.params.artistID}/newArtistForm/update`,
+    src: `/artists/${req.params.artistID}/newArtistForm/update/submit`,
   });
 }
+async function artistUpdatePost(req, res) {
+  const errors = validationResult(req);
 
+  if (!errors.isEmpty()) {
+    res.status(400).render("forms/newArtistFormView", {
+      header: "Add a new artwork",
+      errorMessages: errors.array(),
+      src: `/artists/${req.params.artistID}/newArtistForm/update/submit`,
+    });
+  }
+  await queries.updateExistingArtist(
+    req.params.artistID,
+    res,
+    req.body.firstName,
+    req.body.lastName,
+    req.body.dob,
+    req.body.birthPlace,
+    req.body.description
+  );
+  res.render("forms/newArtistFormView", {
+    header: "Update artist",
+    success: { successMessage: res.locals.successMessage },
+    src: `/artists/${req.params.artistID}/newArtistForm/update/submit`,
+  });
+}
 module.exports = {
   allArtistsGet,
   newArtistFormGet,
@@ -115,4 +136,5 @@ module.exports = {
   newArtistPost,
   deleteArtist,
   artistUpdateFormGet,
+  artistUpdatePost,
 };

@@ -99,6 +99,21 @@ async function deleteArtwork(id) {
 async function deleteMuseum(id) {
   await pool.query("DELETE FROM museums WHERE id = $1", [Number(id)]);
 }
+async function updateExistingArtist(
+  id,
+  res,
+  firstname,
+  lastname,
+  dob,
+  birthplace,
+  description
+) {
+  await pool.query(
+    "UPDATE artists SET firstname =$1, lastname = $2, dob =$3, birthplace = $4, description = $5 WHERE id = $6",
+    [firstname, lastname, dob, birthplace, description, Number(id)]
+  );
+  res.locals.successMessage = "Artist has been updated!";
+}
 module.exports = {
   getAllMuseums,
   getAllArtworks,
@@ -112,4 +127,5 @@ module.exports = {
   deleteArtist,
   deleteArtwork,
   deleteMuseum,
+  updateExistingArtist,
 };
