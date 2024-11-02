@@ -99,6 +99,10 @@ async function deleteArtwork(id) {
 async function deleteMuseum(id) {
   await pool.query("DELETE FROM museums WHERE id = $1", [Number(id)]);
 }
+async function deleteArtist(id) {
+  await pool.query("DELETE FROM artists WHERE id = $1", [Number(id)]);
+  await pool.query("DELETE FROM artworks WHERE artist_id = $1", [Number(id)]);
+}
 async function updateExistingArtist(
   id,
   res,

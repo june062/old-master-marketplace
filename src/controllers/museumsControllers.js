@@ -58,9 +58,10 @@ async function museumInfoGet(req, res) {
 async function newMuseumPost(req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    res.status(400).render("forms/newMuseumFormView", {
+    return res.status(400).render("forms/newMuseumFormView", {
       header: "Add a new museum",
       errorMessages: errors.array(),
+      src: "/museums/newMuseumForm/submit",
     });
   }
   await queries.createNewMuseum(
@@ -72,6 +73,7 @@ async function newMuseumPost(req, res) {
   res.render("forms/newMuseumFormView", {
     header: "Add a new museum",
     success: { successMessage: res.locals.successMessage },
+    src: "/museums/newMuseumForm/submit",
   });
 }
 async function deleteMuseum(req, res) {
@@ -94,7 +96,7 @@ async function updateMuseumFormGet(req, res) {
 async function updateMuseumFormPost(req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    res.status(400).render("forms/newMuseumFormView", {
+    return res.status(400).render("forms/newMuseumFormView", {
       header: "Update museum",
       src: `/museums/${req.params.museumID}/newMuseumForm/update/submit`,
       errorMessages: errors.array(),

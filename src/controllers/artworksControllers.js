@@ -22,8 +22,10 @@ const validationMiddleware = [
     )
     .isLength({ min: 1, max: 120 })
     .withMessage("* Mediums must contain between 1 and 120 characters")
-    .isAlpha()
-    .withMessage("* You can only enter letters into mediums field")
+    .matches("^[.a-zA-Z,!? ]*$")
+    .withMessage(
+      "* You can only enter letters and select special characters in mediums field"
+    )
     .escape(),
 ];
 
@@ -66,7 +68,7 @@ async function newArtworkPost(req, res) {
       errorMessages: errors.array(),
       allArtists: [],
       allMuseums: [],
-      src: `/artworks/${req.params.artworkID}/newArtworkForm/submit`,
+      src: "/artworks/newArtworkForm/submit",
     });
   }
 

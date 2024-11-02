@@ -68,9 +68,10 @@ async function newArtistPost(req, res) {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    res.status(400).render("forms/newArtistFormView", {
+    return res.status(400).render("forms/newArtistFormView", {
       header: "Add a new artist",
       errorMessages: errors.array(),
+      src: "/artists/newArtistForm/submit",
     });
   }
   await queries.createNewArtist(
@@ -84,6 +85,7 @@ async function newArtistPost(req, res) {
   res.render("forms/newArtistFormView", {
     header: "Add a new artist",
     success: { successMessage: res.locals.successMessage },
+    src: "/artists/newArtistForm/submit",
   });
 }
 async function deleteArtist(req, res) {
@@ -107,7 +109,7 @@ async function artistUpdatePost(req, res) {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    res.status(400).render("forms/newArtistFormView", {
+    return res.status(400).render("forms/newArtistFormView", {
       header: "Add a new artwork",
       errorMessages: errors.array(),
       src: `/artists/${req.params.artistID}/newArtistForm/update/submit`,
