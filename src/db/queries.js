@@ -14,7 +14,7 @@ async function getAllArtists() {
 }
 async function getArtistInfo(id) {
   let resultingArtist = await pool.query(
-    "SELECT CONCAT(firstname, ' ', lastname) AS name, dob, birthplace, description FROM artists WHERE id =$1",
+    "SELECT firstname,  lastname, dob, birthplace, description FROM artists WHERE id =$1",
     [Number(id)]
   );
   const artist = resultingArtist.rows[0];
@@ -96,6 +96,9 @@ async function deleteArtist(id) {
 async function deleteArtwork(id) {
   await pool.query("DELETE FROM artworks WHERE artworks.id = $1", [Number(id)]);
 }
+async function deleteMuseum(id) {
+  await pool.query("DELETE FROM museums WHERE id = $1", [Number(id)]);
+}
 module.exports = {
   getAllMuseums,
   getAllArtworks,
@@ -108,4 +111,5 @@ module.exports = {
   createNewMuseum,
   deleteArtist,
   deleteArtwork,
+  deleteMuseum,
 };

@@ -44,6 +44,7 @@ async function newArtworkFormGet(req, res) {
     success: null,
     allArtists: allArtists,
     allMuseums: allMuseums,
+    src: "/artworks/newArtworkForm/submit",
   });
 }
 

@@ -42,6 +42,7 @@ function newMuseumFormGet(req, res) {
     header: "Add a new museum",
     errorMessages: null,
     success: null,
+    src: "/museums/newMuseumForm/submit",
   });
 }
 async function museumInfoGet(req, res) {
@@ -75,11 +76,19 @@ async function newMuseumPost(req, res) {
     success: { successMessage: res.locals.successMessage },
   });
 }
-
+async function deleteMuseum(req, res) {
+  try {
+    await queries.deleteMuseum(req.params.museumID);
+    res.redirect("/museums");
+  } catch (error) {
+    console.log(error);
+  }
+}
 module.exports = {
   allMuseumsGet,
   newMuseumFormGet,
   museumInfoGet,
   newMuseumPost,
   validationMiddleware,
+  deleteMuseum,
 };

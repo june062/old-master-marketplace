@@ -49,11 +49,13 @@ function newArtistFormGet(req, res) {
     header: "Add a new artist",
     errorMessages: null,
     success: null,
+    src: "/artists/newArtistForm/submit",
   });
 }
 
 async function artistInfoGet(req, res) {
   const { artist, artworks } = await queries.getArtistInfo(req.params.artistID);
+  res.locals.artist = artist;
 
   res.render("artistInfo", {
     artist: artist,
@@ -95,6 +97,16 @@ async function deleteArtist(req, res) {
     console.log(error);
   }
 }
+async function artistUpdateFormGet(req, res) {
+  const { artist } = await queries.getArtistInfo(req.params.artistID);
+
+  res.render("forms/newArtistFormView", {
+    header: "Update artist",
+    artist: artist,
+    src: `/artists/${req.params.artistID}/newArtistForm/update`,
+  });
+}
+
 module.exports = {
   allArtistsGet,
   newArtistFormGet,
@@ -102,4 +114,5 @@ module.exports = {
   validationMiddleware,
   newArtistPost,
   deleteArtist,
+  artistUpdateFormGet,
 };

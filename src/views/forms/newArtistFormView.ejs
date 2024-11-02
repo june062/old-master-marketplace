@@ -11,7 +11,7 @@
     <%-include('../reusables/navbar')%>
     <main class="containsForm">
       <h1><%=header%></h1>
-      <form action="/artists/newArtistForm/submit" method="post">
+      <form action= <%=src%> method="post">
         <p>
           <label for="firstName">First Name</label>
           <input
@@ -21,6 +21,9 @@
             minlength="1"
             maxlength="60"
             pattern="^[A-Za-z0-9]+(?: +[A-Za-z0-9]+)*$"
+            <%if(locals.artist){%>
+              value="<%=artist.firstname%>"
+              <%}%>
             required
           />
         </p>
@@ -33,6 +36,9 @@
             minlength="1"
             maxlength="60"
             pattern="^[A-Za-z0-9]+(?: +[A-Za-z0-9]+)*$"
+            <%if(locals.artist){%>
+              value="<%=artist.lastname%>"
+              <%}%>
             required
           />
         </p>
@@ -40,6 +46,7 @@
         <p>
           <label for="dob">Date of Birth</label>
           <input type="date" id="dob" name="dob" required />
+        
         </p>
         <p>
           <label for="birthPlace">Birth Place</label>
@@ -49,6 +56,9 @@
             name="birthPlace"
             minlength="1"
             maxlength="120"
+            <%if(locals.artist){%>
+              value="<%=artist.birthplace%>"
+              <%}%>
             required
           />
         </p>
@@ -59,6 +69,9 @@
             name="description"
             id="description"
             maxlength="255"
+            <%if(locals.artist){%>
+              value="<%=artist.description%>"
+              <%}%>
           ></textarea>
         </p>
 
@@ -76,10 +89,10 @@
           <button type="submit">Add Artist</button>
         </p>
       </form>
-      <%if(errorMessages!= null){%> <%for(let i = 0; i < errorMessages.length;
+      <%if(locals.errorMessages){%> <%for(let i = 0; i < errorMessages.length;
       i++){%>
       <p><%=errorMessages[i].msg%></p>
-      <%}%> <%}%> <%if(success!==null){%>
+      <%}%> <%}%> <%if(locals.success){%>
       <p><%=success.successMessage%></p>
       <%}%>
     </main>

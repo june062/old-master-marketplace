@@ -10,7 +10,7 @@
     <%-include('../reusables/navbar')%>
     <main class="containsForm">
       <h1><%=header%></h1>
-      <form action="/artworks/newArtworkForm/submit" method="post">
+      <form action= <%=src%> method="post">
         <p>
           <label for="artworkName">Name of Artwork</label>
           <input type="text" id="artworkName" name="artworkName" required />

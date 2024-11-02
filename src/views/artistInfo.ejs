@@ -15,11 +15,12 @@
         </a>
       </div>
       <div class = 'selectedElementInfo'>
-        <p>Artists Name: <%=artist.name%></p>
+        <p>Artists Name: <%=artist.firstname%> <%=artist.lastname%></p>
         <p>Date of Birth: <%=artist.dob%></p>
         <p>Birthplace: <%=artist.birthplace%></p>
         <p>Description: <%=artist.description%></p>
         <p><button><a href="/artists/<%=artistID%>/delete">Delete</a></button></p>
+        <p><button><a href="/artists/<%=artistID%>/newArtistForm/update">Update</a></button></p>
       </div>
     </div>
 

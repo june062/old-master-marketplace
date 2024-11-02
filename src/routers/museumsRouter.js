@@ -9,4 +9,5 @@ museumsRouter.post("/newMuseumForm/submit", [
   museumsControllers.newMuseumPost,
 ]);
 museumsRouter.get("/:museumID", museumsControllers.museumInfoGet);
+museumsRouter.get("/:museumID/delete", museumsControllers.deleteMuseum);
 module.exports = museumsRouter;
