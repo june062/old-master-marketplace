@@ -14,5 +14,9 @@ artworksRouter.get(
   "/:artworkID/newArtworkForm/update",
   artworksControllers.updateArtworkFormGet
 );
+artworksRouter.post("/:artworkID/newArtworkForm/update/submit", [
+  artworksControllers.validationMiddleware,
+  artworksControllers.updateArtworkPost,
+]);
 
 module.exports = artworksRouter;

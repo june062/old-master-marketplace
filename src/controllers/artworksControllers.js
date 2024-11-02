@@ -57,12 +57,13 @@ async function artworkInfoGet(req, res) {
   });
 }
 async function newArtworkPost(req, res) {
+  const allArtists = await queries.getAllArtists();
+  const allMuseums = await queries.getAllMuseums();
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).render("forms/newArtworkFormView", {
       header: "Add a new artwork",
       errorMessages: errors.array(),
-      success: null,
       allArtists: [],
       allMuseums: [],
       src: `/artworks/${req.params.artworkID}/newArtworkForm/submit`,
@@ -78,8 +79,7 @@ async function newArtworkPost(req, res) {
     req.body.sold,
     req.body.museum
   );
-  const allArtists = await queries.getAllArtists();
-  const allMuseums = await queries.getAllMuseums();
+
   res.render("forms/newArtworkFormView", {
     src: `/artworks/newArtworkForm/submit`,
     header: "Add a new artwork",
@@ -100,14 +100,47 @@ async function updateArtworkFormGet(req, res) {
   const allArtists = await queries.getAllArtists();
   const allMuseums = await queries.getAllMuseums();
   const [artwork] = await queries.getArtworkInfo(req.params.artworkID);
-  console.log(artwork);
 
   res.render("forms/newArtworkFormView", {
     header: "Update artwork",
-    src: `/artworks/${req.params.artworkID}/newArtworkForm/submit`,
+    src: `/artworks/${req.params.artworkID}/newArtworkForm/update/submit`,
     allArtists: allArtists,
     allMuseums: allMuseums,
     artwork: artwork,
+  });
+}
+
+async function updateArtworkPost(req, res) {
+  const allArtists = await queries.getAllArtists();
+  const allMuseums = await queries.getAllMuseums();
+
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).render("forms/newArtworkFormView", {
+      header: "Update artwork",
+      errorMessages: errors.array(),
+      allArtists: allArtists,
+      allMuseums: allMuseums,
+      src: `/artworks/${req.params.artworkID}/newArtworkForm/update/submit`,
+    });
+  }
+
+  await queries.updateExistingArtwork(
+    req.params.artworkID,
+    res,
+    req.body.artworkName,
+    req.body.mediums,
+    req.body.dateCreated,
+    req.body.artist,
+    req.body.sold,
+    req.body.museum
+  );
+  res.render("forms/newArtworkFormView", {
+    header: "Update artwork",
+    allArtists: allArtists,
+    allMuseums: allMuseums,
+    src: `/artworks/${req.params.artworkID}/newArtworkForm/update/submit`,
+    success: { successMessage: res.locals.successMessage },
   });
 }
 module.exports = {
@@ -118,4 +151,5 @@ module.exports = {
   validationMiddleware,
   deleteArtwork,
   updateArtworkFormGet,
+  updateArtworkPost,
 };

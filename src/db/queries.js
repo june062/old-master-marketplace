@@ -114,6 +114,24 @@ async function updateExistingArtist(
   );
   res.locals.successMessage = "Artist has been updated!";
 }
+async function updateExistingArtwork(
+  id,
+  res,
+  name,
+  mediums,
+  dateCompleted,
+  artist_id,
+  sold,
+  museum_id
+) {
+  await pool.query(
+    "UPDATE artworks SET name = $1, mediums = $2, datecompleted = $3, artist_id = $4, sold = $5, museum_id = $6 WHERE id = $7",
+    [name, mediums, dateCompleted, artist_id, sold, museum_id, Number(id)]
+  );
+  res.locals.successMessage = "Artwork has been updated!";
+}
+
+async function updateExistingMuseum(id) {}
 module.exports = {
   getAllMuseums,
   getAllArtworks,
@@ -128,4 +146,6 @@ module.exports = {
   deleteArtwork,
   deleteMuseum,
   updateExistingArtist,
+  updateExistingArtwork,
+  updateExistingMuseum,
 };
