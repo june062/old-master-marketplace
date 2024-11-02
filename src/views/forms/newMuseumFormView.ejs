@@ -20,6 +20,9 @@
             minlength="1"
             maxlength="60"
             pattern="[a-zA-Z0-9 ]+"
+            <%if(locals.museum){%>
+              value = "<%=museum.name%>""
+              <%}%>
             required
           />
         </p>
@@ -32,6 +35,9 @@
             minlength="1"
             maxlength="40"
             pattern="[a-zA-Z0-9 ]+"
+            <%if(locals.museum){%>
+              value = "<%=museum.city%>""
+              <%}%>
             required
           />
         </p>
@@ -44,13 +50,16 @@
             minlength="1"
             maxlength="40"
             pattern="[a-zA-Z0-9 ]+"
+            <%if(locals.museum){%>
+              value = "<%=museum.country%>""
+              <%}%>
             required
           />
         </p>
 
         <p>
-          <label for="city">Date Created</label>
-          <input type="date" id="city" name="city" required />
+          <label for="date">Date Created</label>
+          <input type="date" id="date" name="date" required />
         </p>
 
         <p>

@@ -34,7 +34,7 @@ async function getArtworkInfo(id) {
 }
 async function getMuseumInfo(id) {
   const museumInfoResult = await pool.query(
-    "SELECT * FROM museums where id = $1",
+    "SELECT * FROM museums WHERE id = $1",
     [Number(id)]
   );
   const museumInfo = museumInfoResult.rows[0];
@@ -131,7 +131,13 @@ async function updateExistingArtwork(
   res.locals.successMessage = "Artwork has been updated!";
 }
 
-async function updateExistingMuseum(id) {}
+async function updateExistingMuseum(id, res, name, city, country) {
+  await pool.query(
+    "UPDATE museums SET name = $1, city = $2, country = $3 WHERE id = $4",
+    [name, city, country, Number(id)]
+  );
+  res.locals.successMessage = "Museum has been updated!";
+}
 module.exports = {
   getAllMuseums,
   getAllArtworks,

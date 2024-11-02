@@ -15,5 +15,9 @@ museumsRouter.get(
   "/:museumID/newMuseumForm/update",
   museumsControllers.updateMuseumFormGet
 );
+museumsRouter.post("/:museumID/newMuseumForm/update/submit", [
+  museumsControllers.validationMiddleware,
+  museumsControllers.updateMuseumFormPost,
+]);
 
 module.exports = museumsRouter;

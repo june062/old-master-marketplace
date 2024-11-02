@@ -40,8 +40,7 @@ async function allMuseumsGet(req, res) {
 function newMuseumFormGet(req, res) {
   res.render("forms/newMuseumFormView", {
     header: "Add a new museum",
-    errorMessages: null,
-    success: null,
+
     src: "/museums/newMuseumForm/submit",
   });
 }
@@ -49,6 +48,7 @@ async function museumInfoGet(req, res) {
   const { museumInfo, museumArtworks } = await queries.getMuseumInfo(
     req.params.museumID
   );
+
   res.render("museumInfo", {
     museumInfo: museumInfo,
     museumArtworks: museumArtworks,
@@ -61,7 +61,6 @@ async function newMuseumPost(req, res) {
     res.status(400).render("forms/newMuseumFormView", {
       header: "Add a new museum",
       errorMessages: errors.array(),
-      success: null,
     });
   }
   await queries.createNewMuseum(
@@ -72,7 +71,6 @@ async function newMuseumPost(req, res) {
   );
   res.render("forms/newMuseumFormView", {
     header: "Add a new museum",
-    errorMessages: null,
     success: { successMessage: res.locals.successMessage },
   });
 }
@@ -86,9 +84,34 @@ async function deleteMuseum(req, res) {
 }
 
 async function updateMuseumFormGet(req, res) {
+  const { museumInfo } = await queries.getMuseumInfo(req.params.museumID);
   res.render("forms/newMuseumFormView", {
     header: "Update museum",
-    src: `/museums/${req.params.museumID}/newArtworkForm/update/submit`,
+    src: `/museums/${req.params.museumID}/newMuseumForm/update/submit`,
+    museum: museumInfo,
+  });
+}
+async function updateMuseumFormPost(req, res) {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    res.status(400).render("forms/newMuseumFormView", {
+      header: "Update museum",
+      src: `/museums/${req.params.museumID}/newMuseumForm/update/submit`,
+      errorMessages: errors.array(),
+    });
+  }
+
+  await queries.updateExistingMuseum(
+    req.params.museumID,
+    res,
+    req.body.museumName,
+    req.body.city,
+    req.body.country
+  );
+  res.render("forms/newMuseumFormView", {
+    header: "Update museum",
+    src: `/museums/${req.params.museumID}/newMuseumForm/update/submit`,
+    success: { successMessage: res.locals.successMessage },
   });
 }
 module.exports = {
@@ -99,4 +122,5 @@ module.exports = {
   validationMiddleware,
   deleteMuseum,
   updateMuseumFormGet,
+  updateMuseumFormPost,
 };
