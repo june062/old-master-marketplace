@@ -14,9 +14,10 @@ async function getAllArtists() {
 }
 async function getArtistInfo(id) {
   let resultingArtist = await pool.query(
-    "SELECT firstname,  lastname, dob, birthplace, description FROM artists WHERE id =$1",
+    "SELECT firstname,  lastname, TO_CHAR(dob, 'Month DD, YYYY') AS dob, birthplace, description FROM artists WHERE id =$1",
     [Number(id)]
   );
+
   const artist = resultingArtist.rows[0];
   let resultingArtworks = await pool.query(
     "SELECT * FROM artworks WHERE artist_id =$1",
