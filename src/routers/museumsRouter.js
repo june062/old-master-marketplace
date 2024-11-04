@@ -8,6 +8,7 @@ museumsRouter.post("/newMuseumForm/submit", [
   museumsControllers.validationMiddleware,
   museumsControllers.newMuseumPost,
 ]);
+museumsRouter.get("/search", museumsControllers.museumSearch);
 museumsRouter.get("/:museumID", museumsControllers.museumInfoGet);
 museumsRouter.get("/:museumID/delete", museumsControllers.deleteMuseum);
 

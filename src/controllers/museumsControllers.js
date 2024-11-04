@@ -32,7 +32,7 @@ async function allMuseumsGet(req, res) {
   const rows = await queries.getAllMuseums();
   res.render("allMuseumsView", {
     header: "All Museums",
-    search: "/museums",
+    search: "/museums/search",
     rows: rows,
   });
 }
@@ -116,6 +116,14 @@ async function updateMuseumFormPost(req, res) {
     success: { successMessage: res.locals.successMessage },
   });
 }
+async function museumSearch(req, res) {
+  const rows = await queries.searchMuseums(req.query.search);
+  res.render("allMuseumsView", {
+    header: "Search Results",
+    search: "/museums/search",
+    rows: rows,
+  });
+}
 module.exports = {
   allMuseumsGet,
   newMuseumFormGet,
@@ -125,4 +133,5 @@ module.exports = {
   deleteMuseum,
   updateMuseumFormGet,
   updateMuseumFormPost,
+  museumSearch,
 };
