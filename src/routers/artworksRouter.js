@@ -8,6 +8,7 @@ artworksRouter.post("/newArtworkForm/submit", [
   artworksControllers.validationMiddleware,
   artworksControllers.newArtworkPost,
 ]);
+artworksRouter.get("/search", artworksControllers.searchArtwork);
 artworksRouter.get("/:artworkID", artworksControllers.artworkInfoGet);
 artworksRouter.get("/:artworkID/delete", artworksControllers.deleteArtwork);
 artworksRouter.get(

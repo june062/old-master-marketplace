@@ -33,7 +33,7 @@ async function allArtworksGet(req, res) {
   const rows = await queries.getAllArtworks();
   res.render("allArtworksView", {
     header: "All Artworks",
-    search: "/artworks",
+    search: "/artworks/search",
     rows: rows,
   });
 }
@@ -145,6 +145,15 @@ async function updateArtworkPost(req, res) {
     success: { successMessage: res.locals.successMessage },
   });
 }
+async function searchArtwork(req, res) {
+  const rows = await queries.searchArtworks(req.query.search);
+
+  res.render("allArtworksView", {
+    header: "Search Results",
+    search: "/artworks/search",
+    rows: rows,
+  });
+}
 module.exports = {
   allArtworksGet,
   newArtworkFormGet,
@@ -154,4 +163,5 @@ module.exports = {
   deleteArtwork,
   updateArtworkFormGet,
   updateArtworkPost,
+  searchArtwork,
 };

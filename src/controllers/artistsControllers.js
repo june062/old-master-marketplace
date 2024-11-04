@@ -132,7 +132,7 @@ async function artistUpdatePost(req, res) {
 }
 
 async function artistSearch(req, res) {
-  let rows = await queries.searchArtist(req.query.search);
+  let rows = await queries.searchArtists(req.query.search);
   res.render("allArtistsView", {
     header: "Search Results",
     rows: rows,
