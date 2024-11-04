@@ -9,6 +9,7 @@
   <body>
     <%-include('../reusables/navbar')%>
     <main class="containsForm">
+    
       
       <h1><%=header%></h1>
       <form action= <%=src%> method="post">
@@ -24,13 +25,16 @@
           <label for="mediums">Mediums Used</label>
           <input type="text" id="mediums" name="mediums" 
           <%if(locals.artwork){%>
-            value = "<%=artwork.mediums%>""
-            <%}%>required />
+            value = "<%=artwork.mediums%>"
+            <%}%> required />
         </p>
 
         <p>
-          <label for="dateCreated">Date Created</label>
-          <input type="date" id="dateCreated" name="dateCreated" required />
+          <label for="dateCreated">Year Created</label>
+          <input type="number" id="dateCreated" name="dateCreated" min = 1000 max = 2000 required
+          <%if(locals.artwork){%>
+            value = "<%=artwork.datecompleted%>"
+            <%}%> />
         </p>
 
         <p>
@@ -60,6 +64,14 @@
             <option value="<%=prop.id%>"><%=prop.name%></option>
             <%}%>
           </select>
+        </p>
+        <p>
+          <label for="sold">Sold</label>
+          <input type="checkbox" id="sold" name="sold" 
+          <%if(locals.artwork){%>
+            value = "<%=artwork.sold%>""
+            <%}%>
+          required />
         </p>
 
         <p>

@@ -143,6 +143,15 @@ async function updateExistingMuseum(id, res, name, city, country) {
   );
   res.locals.successMessage = "Museum has been updated!";
 }
+
+async function searchArtist(searchParams) {
+  let { rows } = await pool.query(
+    "SELECT * FROM artists WHERE firstname ILIKE '%' || $1 || '%' OR lastname ILIKE '%' || $1 || '%'",
+    [searchParams]
+  );
+  return rows;
+}
+
 module.exports = {
   getAllMuseums,
   getAllArtworks,
@@ -159,4 +168,5 @@ module.exports = {
   updateExistingArtist,
   updateExistingArtwork,
   updateExistingMuseum,
+  searchArtist,
 };

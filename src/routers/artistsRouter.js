@@ -9,7 +9,7 @@ artistsRouter.post("/newArtistForm/submit", [
   artistsControllers.validationMiddleware,
   artistsControllers.newArtistPost,
 ]);
-
+artistsRouter.get("/search", artistsControllers.artistSearch);
 artistsRouter.get("/:artistID", artistsControllers.artistInfoGet);
 artistsRouter.get("/:artistID/delete", artistsControllers.deleteArtist);
 artistsRouter.get(

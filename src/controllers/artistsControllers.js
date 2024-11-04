@@ -40,7 +40,7 @@ async function allArtistsGet(req, res) {
   const rows = await queries.getAllArtists();
   res.render("allArtistsView", {
     header: "All Artists",
-    search: "/artists",
+    search: "/artists/search",
     rows: rows,
   });
 }
@@ -130,6 +130,15 @@ async function artistUpdatePost(req, res) {
     src: `/artists/${req.params.artistID}/newArtistForm/update/submit`,
   });
 }
+
+async function artistSearch(req, res) {
+  let rows = await queries.searchArtist(req.query.search);
+  res.render("allArtistsView", {
+    header: "Search Results",
+    rows: rows,
+    search: "/artists/search",
+  });
+}
 module.exports = {
   allArtistsGet,
   newArtistFormGet,
@@ -139,4 +148,5 @@ module.exports = {
   deleteArtist,
   artistUpdateFormGet,
   artistUpdatePost,
+  artistSearch,
 };
