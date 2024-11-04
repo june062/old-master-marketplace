@@ -1,5 +1,7 @@
 const queries = require("../db/queries");
 const { body, validationResult } = require("express-validator");
+const asyncHandler = require("express-async-handler");
+
 const validationMiddleware = [
   body("firstName")
     .trim()
@@ -36,24 +38,24 @@ const validationMiddleware = [
     ),
 ];
 
-async function allArtistsGet(req, res) {
+const allArtistsGet = asyncHandler(async function (req, res) {
   const rows = await queries.getAllArtists();
   res.render("allArtistsView", {
     header: "All Artists",
     search: "/artists/search",
     rows: rows,
   });
-}
-function newArtistFormGet(req, res) {
+});
+const newArtistFormGet = asyncHandler(function (req, res) {
   res.render("forms/newArtistFormView", {
     header: "Add a new artist",
     errorMessages: null,
     success: null,
     src: "/artists/newArtistForm/submit",
   });
-}
+});
 
-async function artistInfoGet(req, res) {
+const artistInfoGet = asyncHandler(async function (req, res) {
   const { artist, artworks } = await queries.getArtistInfo(req.params.artistID);
 
   res.render("artistInfo", {
@@ -62,9 +64,9 @@ async function artistInfoGet(req, res) {
     artistID: req.params.artistID,
   });
   res.end();
-}
+});
 
-async function newArtistPost(req, res) {
+const newArtistPost = asyncHandler(async function (req, res) {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -87,16 +89,16 @@ async function newArtistPost(req, res) {
     success: { successMessage: res.locals.successMessage },
     src: "/artists/newArtistForm/submit",
   });
-}
-async function deleteArtist(req, res) {
+});
+const deleteArtist = asyncHandler(async function (req, res) {
   try {
     await queries.deleteArtist(req.params.artistID);
     res.redirect("/artists");
   } catch (error) {
     console.log(error);
   }
-}
-async function artistUpdateFormGet(req, res) {
+});
+const artistUpdateFormGet = asyncHandler(async function (req, res) {
   const { artist } = await queries.getArtistInfo(req.params.artistID);
 
   res.render("forms/newArtistFormView", {
@@ -104,8 +106,8 @@ async function artistUpdateFormGet(req, res) {
     artist: artist,
     src: `/artists/${req.params.artistID}/newArtistForm/update/submit`,
   });
-}
-async function artistUpdatePost(req, res) {
+});
+const artistUpdatePost = asyncHandler(async function (req, res) {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
@@ -129,16 +131,16 @@ async function artistUpdatePost(req, res) {
     success: { successMessage: res.locals.successMessage },
     src: `/artists/${req.params.artistID}/newArtistForm/update/submit`,
   });
-}
+});
 
-async function artistSearch(req, res) {
+const artistSearch = asyncHandler(async function (req, res) {
   let rows = await queries.searchArtists(req.query.search);
   res.render("allArtistsView", {
     header: "Search Results",
     rows: rows,
     search: "/artists/search",
   });
-}
+});
 module.exports = {
   allArtistsGet,
   newArtistFormGet,

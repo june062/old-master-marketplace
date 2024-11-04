@@ -17,6 +17,9 @@ app.use("/", homeRouter);
 app.use("/artists", artistsRouter);
 app.use("/artworks", artworksRouter);
 app.use("/museums", museumsRouter);
-
+app.use((error, req, res, next) => {
+  console.error(err);
+  res.status(500).send(err);
+});
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, console.log(`Express server is active at port ${PORT}!`));

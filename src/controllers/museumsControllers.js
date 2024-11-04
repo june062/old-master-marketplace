@@ -1,5 +1,6 @@
 const queries = require("../db/queries");
 const { body, validationResult } = require("express-validator");
+const asyncHandler = require("express-async-handler");
 
 const validationMiddleware = [
   body("museumName")
@@ -28,14 +29,14 @@ const validationMiddleware = [
     .withMessage("* You must enter a country"),
 ];
 
-async function allMuseumsGet(req, res) {
+const allMuseumsGet = asyncHandler(async function (req, res) {
   const rows = await queries.getAllMuseums();
   res.render("allMuseumsView", {
     header: "All Museums",
     search: "/museums/search",
     rows: rows,
   });
-}
+});
 
 function newMuseumFormGet(req, res) {
   res.render("forms/newMuseumFormView", {
@@ -44,7 +45,7 @@ function newMuseumFormGet(req, res) {
     src: "/museums/newMuseumForm/submit",
   });
 }
-async function museumInfoGet(req, res) {
+const museumInfoGet = asyncHandler(async function (req, res) {
   const { museumInfo, museumArtworks } = await queries.getMuseumInfo(
     req.params.museumID
   );
@@ -54,8 +55,8 @@ async function museumInfoGet(req, res) {
     museumArtworks: museumArtworks,
     museumID: req.params.museumID,
   });
-}
-async function newMuseumPost(req, res) {
+});
+const newMuseumPost = asyncHandler(async function (req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).render("forms/newMuseumFormView", {
@@ -75,25 +76,25 @@ async function newMuseumPost(req, res) {
     success: { successMessage: res.locals.successMessage },
     src: "/museums/newMuseumForm/submit",
   });
-}
-async function deleteMuseum(req, res) {
+});
+const deleteMuseum = asyncHandler(async function (req, res) {
   try {
     await queries.deleteMuseum(req.params.museumID);
     res.redirect("/museums");
   } catch (error) {
     console.log(error);
   }
-}
+});
 
-async function updateMuseumFormGet(req, res) {
+const updateMuseumFormGet = asyncHandler(async function (req, res) {
   const { museumInfo } = await queries.getMuseumInfo(req.params.museumID);
   res.render("forms/newMuseumFormView", {
     header: "Update museum",
     src: `/museums/${req.params.museumID}/newMuseumForm/update/submit`,
     museum: museumInfo,
   });
-}
-async function updateMuseumFormPost(req, res) {
+});
+const updateMuseumFormPost = asyncHandler(async function (req, res) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).render("forms/newMuseumFormView", {
@@ -115,15 +116,15 @@ async function updateMuseumFormPost(req, res) {
     src: `/museums/${req.params.museumID}/newMuseumForm/update/submit`,
     success: { successMessage: res.locals.successMessage },
   });
-}
-async function museumSearch(req, res) {
+});
+const museumSearch = asyncHandler(async function (req, res) {
   const rows = await queries.searchMuseums(req.query.search);
   res.render("allMuseumsView", {
     header: "Search Results",
     search: "/museums/search",
     rows: rows,
   });
-}
+});
 module.exports = {
   allMuseumsGet,
   newMuseumFormGet,

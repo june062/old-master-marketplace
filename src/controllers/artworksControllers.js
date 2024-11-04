@@ -1,6 +1,7 @@
 const { query } = require("../db/pool");
 const queries = require("../db/queries");
 const { body, validationResult } = require("express-validator");
+const asyncHandler = require("express-async-handler");
 
 const validationMiddleware = [
   body("artworkName")
@@ -29,15 +30,15 @@ const validationMiddleware = [
     .escape(),
 ];
 
-async function allArtworksGet(req, res) {
+const allArtworksGet = asyncHandler(async function (req, res) {
   const rows = await queries.getAllArtworks();
   res.render("allArtworksView", {
     header: "All Artworks",
     search: "/artworks/search",
     rows: rows,
   });
-}
-async function newArtworkFormGet(req, res) {
+});
+const newArtworkFormGet = asyncHandler(async function (req, res) {
   const allArtists = await queries.getAllArtists();
   const allMuseums = await queries.getAllMuseums();
   res.render("forms/newArtworkFormView", {
@@ -48,17 +49,17 @@ async function newArtworkFormGet(req, res) {
     allMuseums: allMuseums,
     src: "/artworks/newArtworkForm/submit",
   });
-}
+});
 
-async function artworkInfoGet(req, res) {
+const artworkInfoGet = asyncHandler(async function (req, res) {
   const [artworkInfo] = await queries.getArtworkInfo(req.params.artworkID);
 
   res.render("artworkInfo", {
     artworkInfo: artworkInfo,
     artworkID: req.params.artworkID,
   });
-}
-async function newArtworkPost(req, res) {
+});
+const newArtworkPost = asyncHandler(async function (req, res) {
   const allArtists = await queries.getAllArtists();
   const allMuseums = await queries.getAllMuseums();
   const errors = validationResult(req);
@@ -89,16 +90,16 @@ async function newArtworkPost(req, res) {
     allArtists: allArtists,
     allMuseums: allMuseums,
   });
-}
-async function deleteArtwork(req, res) {
+});
+const deleteArtwork = asyncHandler(async function (req, res) {
   try {
     await queries.deleteArtwork(req.params.artworkID);
     res.redirect("/artworks");
   } catch (error) {
     console.log(error);
   }
-}
-async function updateArtworkFormGet(req, res) {
+});
+const updateArtworkFormGet = asyncHandler(async function (req, res) {
   const allArtists = await queries.getAllArtists();
   const allMuseums = await queries.getAllMuseums();
   const [artwork] = await queries.getArtworkInfo(req.params.artworkID);
@@ -110,9 +111,9 @@ async function updateArtworkFormGet(req, res) {
     allMuseums: allMuseums,
     artwork: artwork,
   });
-}
+});
 
-async function updateArtworkPost(req, res) {
+const updateArtworkPost = asyncHandler(async function (req, res) {
   const allArtists = await queries.getAllArtists();
   const allMuseums = await queries.getAllMuseums();
 
@@ -144,8 +145,8 @@ async function updateArtworkPost(req, res) {
     src: `/artworks/${req.params.artworkID}/newArtworkForm/update/submit`,
     success: { successMessage: res.locals.successMessage },
   });
-}
-async function searchArtwork(req, res) {
+});
+const searchArtwork = asyncHandler(async function (req, res) {
   const rows = await queries.searchArtworks(req.query.search);
 
   res.render("allArtworksView", {
@@ -153,7 +154,7 @@ async function searchArtwork(req, res) {
     search: "/artworks/search",
     rows: rows,
   });
-}
+});
 module.exports = {
   allArtworksGet,
   newArtworkFormGet,
